@@ -862,7 +862,7 @@ def create_ticket(request):
             return HttpResponseRedirect(ticket.get_absolute_url())
     else:
         initial_data = {}
-        if request.user.usersettings.settings.get('use_email_as_submitter', False) and request.user.email:
+        if request.user.helpdesk_user_settings.settings.get('use_email_as_submitter', False) and request.user.email:
             initial_data['submitter_email'] = request.user.email
         if request.GET.has_key('queue'):
             initial_data['queue'] = request.GET['queue']
@@ -1151,7 +1151,7 @@ delete_saved_query = staff_member_required(delete_saved_query)
 
 
 def user_settings(request):
-    s = request.user.usersettings
+    s = request.user.helpdesk_user_settings
     if request.POST:
         form = UserSettingsForm(request.POST)
         if form.is_valid():

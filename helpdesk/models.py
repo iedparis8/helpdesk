@@ -993,7 +993,7 @@ class UserSettings(models.Model):
     We should always refer to user.usersettings.settings['setting_name'].
     """
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='helpdesk_user_settings')
 
     settings_pickled = models.TextField(
         _('Settings Dictionary'),
