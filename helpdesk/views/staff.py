@@ -503,7 +503,7 @@ def update_ticket(request, ticket_id, public=False):
         else:
             template_staff = 'updated_owner'
 
-        if (not reassigned or ( reassigned and ticket.assigned_to.usersettings.settings.get('email_on_ticket_assign', False))) or (not reassigned and ticket.assigned_to.usersettings.settings.get('email_on_ticket_change', False)):
+        if (not reassigned or ( reassigned and ticket.assigned_to.helpdesk_user_settings.settings.get('email_on_ticket_assign', False))) or (not reassigned and ticket.assigned_to.helpdesk_user_settings.settings.get('email_on_ticket_change', False)):
             send_templated_mail(
                 template_staff,
                 context,

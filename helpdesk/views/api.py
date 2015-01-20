@@ -237,7 +237,7 @@ class API:
                 )
             messages_sent_to.append(ticket.queue.updated_ticket_cc)
 
-        if ticket.assigned_to and self.request.user != ticket.assigned_to and getattr(ticket.assigned_to.usersettings.settings, 'email_on_ticket_apichange', False) and ticket.assigned_to.email and ticket.assigned_to.email not in messages_sent_to:
+        if ticket.assigned_to and self.request.user != ticket.assigned_to and getattr(ticket.assigned_to.helpdesk_user_settings.settings, 'email_on_ticket_apichange', False) and ticket.assigned_to.email and ticket.assigned_to.email not in messages_sent_to:
             send_templated_mail(
                 'updated_owner',
                 context,
@@ -310,7 +310,7 @@ class API:
                 )
             messages_sent_to.append(ticket.queue.updated_ticket_cc)
 
-        if ticket.assigned_to and self.request.user != ticket.assigned_to and getattr(ticket.assigned_to.usersettings.settings, 'email_on_ticket_apichange', False) and ticket.assigned_to.email and ticket.assigned_to.email not in messages_sent_to:
+        if ticket.assigned_to and self.request.user != ticket.assigned_to and getattr(ticket.assigned_to.helpdesk_user_settings.settings, 'email_on_ticket_apichange', False) and ticket.assigned_to.email and ticket.assigned_to.email not in messages_sent_to:
             send_templated_mail(
                 'resolved_resolved',
                 context,
