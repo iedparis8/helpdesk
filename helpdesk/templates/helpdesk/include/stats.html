@@ -1,6 +1,6 @@
 {% load i18n %}{% load url from future %}
 <table class="table table-hover table-bordered table-striped ticket-stats">
-<caption>{% trans "Current Ticket Stats" %}</caption>
+<caption>Statistique des Tickets en cours</caption>
 <thead>
 <tr><td colspan='2'>- {% trans "Average number of days until ticket is closed (all tickets): " %}<strong style="color: red;">{{ basic_ticket_stats.average_nbr_days_until_ticket_closed }}</strong>.</td></tr>
 <tr><td colspan='2'>- {% trans "Average number of days until ticket is closed (tickets opened in last 60 days): " %}<strong style="color: red;">{{ basic_ticket_stats.average_nbr_days_until_ticket_closed_last_60_days }}</strong>.

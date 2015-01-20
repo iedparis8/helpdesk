@@ -67,6 +67,7 @@ def send_templated_mail(template_name, email_context, recipients, sender=None, b
         locale = 'en'
 
     t = None
+    print template_name
     try:
         t = EmailTemplate.objects.get(template_name__iexact=template_name, locale=locale)
     except EmailTemplate.DoesNotExist:

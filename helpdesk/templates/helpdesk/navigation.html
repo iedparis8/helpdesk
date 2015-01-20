@@ -13,6 +13,7 @@
     <div class="collapse navbar-collapse" id="helpdesk-nav-collapse">
         {% if helpdesk_settings.HELPDESK_NAVIGATION_ENABLED and user.is_authenticated or user.is_staff %}
             <ul class="nav navbar-nav">
+                <li><a href='/'><span class="glyphicon glyphicon-home"></span> <span class="nav-text">Accueil</span></a></li>
                 <li><a href='{% url 'helpdesk_dashboard' %}'><span class="glyphicon glyphicon-dashboard"></span> <span class="nav-text">{% trans "Dashboard" %}</span></a></li>
                 <li><a href='{% url 'helpdesk_list' %}'><span class="glyphicon glyphicon-tags"></span> <span class="nav-text">{% trans "Tickets" %}</span></a></li>
                 <li><a href='{% url 'helpdesk_submit' %}'><span class="glyphicon glyphicon-plus"></span> <span class="nav-text">{% trans "New Ticket" %}</span></a></li>

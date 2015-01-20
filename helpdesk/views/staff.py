@@ -131,7 +131,7 @@ def delete_ticket(request, ticket_id):
     else:
         ticket.delete()
         return HttpResponseRedirect(reverse('helpdesk_home'))
-delete_ticket = staff_member_required(delete_ticket)
+delete_ticket = superuser_required(delete_ticket)
 
 def followup_edit(request, ticket_id, followup_id):
     "Edit followup options with an ability to change the ticket."
@@ -190,7 +190,7 @@ def followup_delete(request, ticket_id, followup_id):
     followup = get_object_or_404(FollowUp, id=followup_id)
     followup.delete()
     return HttpResponseRedirect(reverse('helpdesk_view', args=[ticket.id]))
-followup_delete = staff_member_required(followup_delete)
+followup_delete = superuser_required(followup_delete)
 
 
 def view_ticket(request, ticket_id):
@@ -641,7 +641,7 @@ def mass_update(request):
             t.delete()
 
     return HttpResponseRedirect(reverse('helpdesk_list'))
-mass_update = staff_member_required(mass_update)
+mass_update = superuser_required(mass_update)
 
 def ticket_list(request):
     context = {}
@@ -1118,7 +1118,7 @@ def run_report(request, report):
             'from_saved_query': from_saved_query,
             'saved_query': saved_query,
         }))
-run_report = staff_member_required(run_report)
+run_report = superuser_required(run_report)
 
 
 def save_query(request):
@@ -1147,7 +1147,7 @@ def delete_saved_query(request, id):
             RequestContext(request, {
                 'query': query,
                 }))
-delete_saved_query = staff_member_required(delete_saved_query)
+delete_saved_query = superuser_required(delete_saved_query)
 
 
 def user_settings(request):
@@ -1240,7 +1240,7 @@ def ticket_cc_del(request, ticket_id, cc_id):
         RequestContext(request, {
             'cc': cc,
         }))
-ticket_cc_del = staff_member_required(ticket_cc_del)
+ticket_cc_del = superuser_required(ticket_cc_del)
 
 def ticket_dependency_add(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
@@ -1270,7 +1270,7 @@ def ticket_dependency_del(request, ticket_id, dependency_id):
         RequestContext(request, {
             'dependency': dependency,
         }))
-ticket_dependency_del = staff_member_required(ticket_dependency_del)
+ticket_dependency_del = superuser_required(ticket_dependency_del)
 
 def attachment_del(request, ticket_id, attachment_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
