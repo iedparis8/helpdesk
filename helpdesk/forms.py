@@ -140,7 +140,7 @@ class TicketForm(CustomFieldMixin, forms.Form):
     submitter_email = forms.EmailField(
         required=False,
         label=_('Submitter E-Mail Address'),
-        widget=forms.TextInput(attrs={'size':'60'}),
+        widget=forms.HiddenInput(),
         help_text=_('This e-mail address will receive copies of all public '
             'updates to this ticket.'),
         )
@@ -169,7 +169,7 @@ class TicketForm(CustomFieldMixin, forms.Form):
         )
 
     due_date = forms.DateTimeField(
-        widget=extras.SelectDateWidget,
+        widget=forms.HiddenInput(),
         required=False,
         label=_('Due on'),
         )
