@@ -2,10 +2,12 @@
 <table class="table table-hover table-bordered table-striped">
 <thead>
     <tr class='row_tablehead'><td colspan='2'><h3>{{ ticket.id }}. {{ ticket.title }} [{{ ticket.get_status }}]</h3> <span class='ticket_toolbar'>
+
         <a href='{% url 'helpdesk_edit' ticket.id %}' class="ticket-edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+        {% if user.is_superuser %}
     | <a href='{% url 'helpdesk_delete' ticket.id %}' class="ticket-delete"><span class="glyphicon glyphicon-remove"></span> Delete</a>
     {% if ticket.on_hold %} | <a href='unhold/' class="ticket-hold">{% trans "Unhold" %}</a>{% else %} | <a href='hold/' class="ticket-hold">{% trans "Hold" %}</a>{% endif %}
-    </span></td></tr>
+    </span>{% endif %}</td></tr>
 <tr><th colspan='2'>{% blocktrans with ticket.queue as queue %}Queue: {{ queue }}{% endblocktrans %}</th></tr>
 </thead>
 <tbody>
@@ -35,7 +37,7 @@
 
 <tr>
     <th>{% trans "Assigned To" %}</th>
-    <td>{{ ticket.get_assigned_to }}{% ifequal ticket.get_assigned_to _('Unassigned') %} <strong><a href='?take'><span class='button button_take'>{% trans "Take" %}</span></a></strong>{% endifequal %}</td>
+    <td>{{ ticket.get_assigned_to }}{% ifequal ticket.get_assigned_to _('Unassigned') %} {% if user.is_superuser %}<strong><a href='?take'><span class='button button_take'>{% trans "Take" %}</span></a></strong>{% endif %} {% endifequal %}</td>
 </tr>
 
 <tr>
@@ -62,7 +64,7 @@
         {% empty %}
         <p>{% trans "This ticket has no dependencies." %}</p>
         {% endfor %}
-        <p><a data-toggle='tooltip' href='{% url 'helpdesk_ticket_dependency_add' ticket.id %}' title="{% trans "Click on 'Add Dependency', if you want to make this ticket dependent on another ticket. A ticket may not be closed until all tickets it depends on are closed." %}">{% trans "Add Dependency" %}</a></p>
+        {% if user.is_superuser %}<p><a data-toggle='tooltip' href='{% url 'helpdesk_ticket_dependency_add' ticket.id %}' title="{% trans "Click on 'Add Dependency', if you want to make this ticket dependent on another ticket. A ticket may not be closed until all tickets it depends on are closed." %}">{% trans "Add Dependency" %}</a></p>{% endif %}
     </td>
 </tr>
 
